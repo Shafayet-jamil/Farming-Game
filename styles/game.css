@@ -1,0 +1,476 @@
+/* NASA Farm Navigators - Game Screen Styles */
+
+/* Game Screen Layout */
+#game-screen {
+    background: linear-gradient(180deg, #87CEEB 0%, #e8f5e8 30%);
+}
+
+/* Game Toolbar */
+.game-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: var(--spacing-md) var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    border-bottom: 2px solid var(--primary-green);
+    z-index: 100;
+}
+
+.toolbar-left, .toolbar-center, .toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.toolbar-btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.9rem;
+}
+
+.game-phase {
+    background: linear-gradient(135deg, var(--nasa-blue), var(--earth-blue));
+    color: var(--white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.farm-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.farm-info span {
+    font-size: 0.9rem;
+    color: var(--dark-gray);
+}
+
+.farm-info span:first-child {
+    font-weight: 600;
+    color: var(--primary-green);
+}
+
+/* Sustainability Score Display */
+.sustainability-score {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: var(--light-gray);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+}
+
+.score-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--dark-gray);
+}
+
+#sustainability-value {
+    font-weight: bold;
+    color: var(--primary-green);
+    min-width: 30px;
+}
+
+.score-bar {
+    width: 60px;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.score-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--error-red), var(--warning-orange), var(--success-green));
+    width: 0%;
+    transition: width var(--transition-normal);
+}
+
+/* Game Content Layout */
+.game-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.farm-container {
+    flex: 1;
+    position: relative;
+    margin: var(--spacing-lg);
+    background: #f5f5dc;
+    border: 3px solid var(--soil-brown);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+#farm-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+        #8BC34A 0%, 
+        #AED581 25%, 
+        #C8E6C9 50%, 
+        #81C784 75%, 
+        #66BB6A 100%
+    );
+}
+
+.farm-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+/* Control Panel */
+.control-panel {
+    width: 350px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-left: 2px solid var(--primary-green);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel {
+    display: none;
+    padding: var(--spacing-lg);
+    flex: 1;
+}
+
+.panel.active {
+    display: block;
+}
+
+.panel h3 {
+    color: var(--primary-green);
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.3rem;
+    border-bottom: 2px solid var(--light-gray);
+    padding-bottom: var(--spacing-sm);
+}
+
+/* Location Selection */
+.location-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.location-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--spacing-md);
+    background: var(--white);
+    border: 2px solid var(--light-gray);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-align: left;
+}
+
+.location-btn:hover {
+    border-color: var(--primary-green);
+    background: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.location-btn.selected {
+    border-color: var(--primary-green);
+    background: #e8f5e8;
+    box-shadow: var(--shadow-md);
+}
+
+.location-name {
+    font-weight: 600;
+    color: var(--primary-green);
+    font-size: 1.1rem;
+}
+
+.location-climate {
+    font-size: 0.9rem;
+    color: var(--medium-gray);
+    margin-top: var(--spacing-xs);
+}
+
+/* Decision Controls */
+.decision-group {
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-md);
+    background: #f8f9fa;
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--primary-green);
+}
+
+.decision-group h4 {
+    color: var(--dark-gray);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.1rem;
+}
+
+.nasa-data-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--nasa-blue);
+    color: var(--white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-md);
+    font-size: 0.9rem;
+}
+
+.data-label {
+    font-weight: 600;
+}
+
+/* Form Controls */
+.irrigation-controls, .fertilizer-controls, .pest-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 6px;
+    border-radius: var(--radius-sm);
+    background: #ddd;
+    outline: none;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-full);
+    background: var(--primary-green);
+    cursor: pointer;
+    border: 2px solid var(--white);
+    box-shadow: var(--shadow-sm);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-full);
+    background: var(--primary-green);
+    cursor: pointer;
+    border: 2px solid var(--white);
+    box-shadow: var(--shadow-sm);
+}
+
+select {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 2px solid var(--light-gray);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--primary-green);
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    font-size: 0.9rem;
+    color: var(--dark-gray);
+}
+
+/* Results Display */
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.result-card {
+    background: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border-top: 3px solid var(--primary-green);
+}
+
+.result-card h4 {
+    font-size: 0.9rem;
+    color: var(--dark-gray);
+    margin-bottom: var(--spacing-sm);
+}
+
+.result-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--primary-green);
+}
+
+.learning-insights {
+    background: #fff3cd;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--crop-yellow);
+    margin-bottom: var(--spacing-lg);
+}
+
+.learning-insights h4 {
+    color: var(--warning-orange);
+    margin-bottom: var(--spacing-sm);
+}
+
+.result-actions {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.result-actions .action-btn {
+    flex: 1;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.9rem;
+}
+
+/* NASA Data Panel */
+.nasa-data-panel {
+    background: linear-gradient(135deg, var(--nasa-blue), var(--earth-blue));
+    color: var(--white);
+    padding: var(--spacing-md);
+    margin-top: auto;
+}
+
+.nasa-data-panel h4 {
+    margin-bottom: var(--spacing-md);
+    font-size: 1rem;
+}
+
+.data-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.data-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: rgba(255, 255, 255, 0.1);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+}
+
+.data-icon {
+    font-size: 1.2rem;
+}
+
+.data-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.data-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.data-value {
+    font-size: 0.9rem;
+    margin: var(--spacing-xs) 0;
+}
+
+.data-source {
+    font-size: 0.7rem;
+    opacity: 0.8;
+    font-family: var(--font-mono);
+}
+
+/* Responsive Design for Game Screen */
+@media (max-width: 1024px) {
+    .control-panel {
+        width: 300px;
+    }
+    
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .game-toolbar {
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
+    }
+    
+    .toolbar-center {
+        order: 3;
+        flex-basis: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-content {
+        flex-direction: column;
+    }
+    
+    .farm-container {
+        height: 300px;
+        margin: var(--spacing-md);
+    }
+    
+    .control-panel {
+        width: 100%;
+        height: auto;
+        max-height: 400px;
+    }
+    
+    .game-toolbar {
+        padding: var(--spacing-sm);
+    }
+    
+    .toolbar-left, .toolbar-right, .toolbar-center {
+        flex-wrap: wrap;
+        gap: var(--spacing-xs);
+    }
+}
+
+/* Disabled State */
+button:disabled, input:disabled, select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Animation for phase transitions */
+.panel {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
