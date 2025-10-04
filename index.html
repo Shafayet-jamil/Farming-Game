@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA Farm Navigators - Educational Agriculture Game</title>
+    <meta name="description" content="Learn sustainable farming with NASA's Earth observation data">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/game.css">
+    <link rel="stylesheet" href="styles/educational.css">
+    <link rel="stylesheet" href="styles/print.css" media="print">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="screen active">
+        <div class="loading-content">
+            <h1>🌱 NASA Farm Navigators</h1>
+            <div class="loading-spinner"></div>
+            <p>Loading Earth observation data...</p>
+        </div>
+    </div>
+
+    <!-- Main Menu -->
+    <div id="main-menu" class="screen">
+        <header class="game-header">
+            <h1>🛰️ NASA Farm Navigators</h1>
+            <p class="tagline">Learn sustainable farming with real NASA satellite data</p>
+        </header>
+        
+        <nav class="main-nav">
+            <button id="start-game" class="nav-button primary">
+                <span class="button-icon">🎮</span>
+                Start Farming
+            </button>
+            <button id="tutorial-btn" class="nav-button">
+                <span class="button-icon">📚</span>
+                Tutorial
+            </button>
+            <button id="data-explainer-btn" class="nav-button">
+                <span class="button-icon">🔬</span>
+                Under the Hood
+            </button>
+            <button id="teacher-mode-btn" class="nav-button">
+                <span class="button-icon">👨‍🏫</span>
+                Teacher Mode
+            </button>
+        </nav>
+
+        <footer class="menu-footer">
+            <p>Powered by NASA's Earth Science Data</p>
+            <div class="nasa-logos">
+                <span class="data-source">SMAP • IMERG • LP DAAC</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen">
+        <header class="game-toolbar">
+            <div class="toolbar-left">
+                <button id="menu-btn" class="toolbar-btn">
+                    <span class="button-icon">🏠</span>
+                    Menu
+                </button>
+                <div class="game-phase">
+                    <span id="phase-indicator">Setup Phase</span>
+                </div>
+            </div>
+            
+            <div class="toolbar-center">
+                <div class="farm-info">
+                    <span id="farm-location">Select Farm Location</span>
+                    <span id="current-season">Spring</span>
+                </div>
+            </div>
+            
+            <div class="toolbar-right">
+                <div class="sustainability-score">
+                    <span class="score-label">Sustainability:</span>
+                    <span id="sustainability-value">0</span>
+                    <div class="score-bar">
+                        <div id="score-fill" class="score-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-content">
+            <!-- Farm Canvas -->
+            <div class="farm-container">
+                <canvas id="farm-canvas" width="800" height="600"></canvas>
+                <div id="farm-overlay" class="farm-overlay">
+                    <!-- Interactive elements overlay -->
+                </div>
+            </div>
+
+            <!-- Control Panel -->
+            <aside class="control-panel">
+                <!-- Location Selection (Setup Phase) -->
+                <div id="location-panel" class="panel active">
+                    <h3>🌍 Choose Farm Location</h3>
+                    <div class="location-options">
+                        <button class="location-btn" data-location="iowa">
+                            <span class="location-name">Iowa, USA</span>
+                            <span class="location-climate">Temperate Continental</span>
+                        </button>
+                        <button class="location-btn" data-location="california">
+                            <span class="location-name">California, USA</span>
+                            <span class="location-climate">Mediterranean</span>
+                        </button>
+                        <button class="location-btn" data-location="india">
+                            <span class="location-name">Punjab, India</span>
+                            <span class="location-climate">Semi-Arid</span>
+                        </button>
+                    </div>
+                    <button id="confirm-location" class="action-btn primary" disabled>
+                        Confirm Location
+                    </button>
+                </div>
+
+                <!-- Decision Panel (Decision Phase) -->
+                <div id="decision-panel" class="panel">
+                    <h3>🌾 Farm Management Decisions</h3>
+                    
+                    <!-- Irrigation Controls -->
+                    <div class="decision-group">
+                        <h4>💧 Irrigation</h4>
+                        <div class="nasa-data-display">
+                            <span class="data-label">SMAP Soil Moisture:</span>
+                            <span id="soil-moisture-value">Loading...</span>
+                        </div>
+                        <div class="irrigation-controls">
+                            <label>
+                                <input type="range" id="irrigation-amount" min="0" max="100" value="50">
+                                <span>Amount: <span id="irrigation-display">50</span>mm</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Fertilization Controls -->
+                    <div class="decision-group">
+                        <h4>🌱 Fertilization</h4>
+                        <div class="nasa-data-display">
+                            <span class="data-label">NDVI:</span>
+                            <span id="ndvi-value">Loading...</span>
+                        </div>
+                        <div class="fertilizer-controls">
+                            <select id="fertilizer-type">
+                                <option value="organic">Organic</option>
+                                <option value="synthetic">Synthetic</option>
+                                <option value="none">None</option>
+                            </select>
+                            <label>
+                                <input type="range" id="fertilizer-amount" min="0" max="100" value="25">
+                                <span>Amount: <span id="fertilizer-display">25</span>kg/ha</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pest Management -->
+                    <div class="decision-group">
+                        <h4>🐛 Pest Management</h4>
+                        <div class="nasa-data-display">
+                            <span class="data-label">Temperature:</span>
+                            <span id="temperature-value">Loading...</span>
+                        </div>
+                        <div class="pest-controls">
+                            <select id="pest-method">
+                                <option value="ipm">Integrated Pest Management</option>
+                                <option value="organic">Organic Pesticides</option>
+                                <option value="conventional">Conventional Pesticides</option>
+                                <option value="none">No Treatment</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button id="apply-decisions" class="action-btn primary">
+                        Apply Decisions
+                    </button>
+                </div>
+
+                <!-- Results Panel (Results Phase) -->
+                <div id="results-panel" class="panel">
+                    <h3>📊 Harvest Results</h3>
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <h4>Crop Yield</h4>
+                            <div class="result-value" id="crop-yield">0 tons/ha</div>
+                        </div>
+                        <div class="result-card">
+                            <h4>Sustainability Score</h4>
+                            <div class="result-value" id="final-sustainability">0/100</div>
+                        </div>
+                        <div class="result-card">
+                            <h4>Water Efficiency</h4>
+                            <div class="result-value" id="water-efficiency">0%</div>
+                        </div>
+                        <div class="result-card">
+                            <h4>Soil Health</h4>
+                            <div class="result-value" id="soil-health">0%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="learning-insights">
+                        <h4>🎓 Learning Insights</h4>
+                        <div id="insights-content">
+                            <!-- Dynamically populated insights -->
+                        </div>
+                    </div>
+
+                    <div class="result-actions">
+                        <button id="next-season" class="action-btn primary">Next Season</button>
+                        <button id="view-data-explanation" class="action-btn">Explain NASA Data</button>
+                    </div>
+                </div>
+
+                <!-- NASA Data Display -->
+                <div class="nasa-data-panel">
+                    <h4>🛰️ Real-Time NASA Data</h4>
+                    <div class="data-grid">
+                        <div class="data-item">
+                            <span class="data-icon">💧</span>
+                            <div class="data-info">
+                                <span class="data-name">Precipitation</span>
+                                <span class="data-value" id="precipitation-value">Loading...</span>
+                                <span class="data-source">IMERG</span>
+                            </div>
+                        </div>
+                        <div class="data-item">
+                            <span class="data-icon">🌡️</span>
+                            <div class="data-info">
+                                <span class="data-name">Land Surface Temp</span>
+                                <span class="data-value" id="lst-value">Loading...</span>
+                                <span class="data-source">LP DAAC</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Data Explainer Screen -->
+    <div id="data-explainer-screen" class="screen">
+        <header class="explainer-header">
+            <button id="back-to-menu" class="back-btn">← Back to Menu</button>
+            <h2>🔬 Under the Hood: NASA Data Explained</h2>
+        </header>
+        <main class="explainer-content">
+            <div class="dataset-tabs">
+                <button class="tab-btn active" data-dataset="smap">SMAP</button>
+                <button class="tab-btn" data-dataset="imerg">IMERG</button>
+                <button class="tab-btn" data-dataset="lpdaac">LP DAAC</button>
+            </div>
+            <div id="dataset-content" class="dataset-info">
+                <!-- Content dynamically loaded based on selected dataset -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Teacher Mode Screen -->
+    <div id="teacher-mode-screen" class="screen">
+        <header class="teacher-header">
+            <button id="back-to-menu-teacher" class="back-btn">← Back to Menu</button>
+            <h2>👨‍🏫 Teacher Mode</h2>
+        </header>
+        <main class="teacher-content">
+            <div class="teacher-tools">
+                <button id="generate-worksheet" class="tool-btn">
+                    📄 Generate Worksheet
+                </button>
+                <button id="classroom-demo" class="tool-btn">
+                    🖥️ Classroom Demo
+                </button>
+                <button id="export-results" class="tool-btn">
+                    📊 Export Results
+                </button>
+            </div>
+            <div id="worksheet-preview" class="worksheet-preview">
+                <!-- Worksheet content for printing -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Tooltip System -->
+    <div id="tooltip" class="tooltip">
+        <div class="tooltip-content">
+            <div class="tooltip-text"></div>
+            <div class="tooltip-arrow"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript Modules -->
+    <script src="js/utils/constants.js"></script>
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/data/nasaAPI.js"></script>
+    <script src="js/game/gameEngine.js"></script>
+    <script src="js/game/farmSimulation.js"></script>
+    <script src="js/game/gameState.js"></script>
+    <script src="js/ui/interface.js"></script>
+    <script src="js/ui/tooltip.js"></script>
+    <script src="js/educational/dataExplainer.js"></script>
+    <script src="js/educational/teacherMode.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

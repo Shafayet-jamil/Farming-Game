@@ -1,0 +1,338 @@
+/* NASA Farm Navigators - Print Styles */
+
+@media print {
+    /* Reset for print */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Hide non-printable elements */
+    .screen:not(#teacher-mode-screen),
+    .back-btn,
+    .nav-button,
+    .action-btn,
+    .toolbar-btn,
+    .tool-btn,
+    .game-toolbar,
+    .teacher-tools,
+    .loading-screen,
+    .tooltip {
+        display: none !important;
+    }
+
+    /* Show only worksheet content when printing */
+    #teacher-mode-screen {
+        display: block !important;
+        position: static !important;
+        width: auto !important;
+        height: auto !important;
+        background: white !important;
+    }
+
+    .teacher-header {
+        display: none !important;
+    }
+
+    .teacher-content {
+        padding: 0 !important;
+        max-width: none !important;
+        margin: 0 !important;
+    }
+
+    .worksheet-preview {
+        border: none !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 20mm !important;
+        min-height: auto !important;
+    }
+
+    /* Typography for print */
+    body {
+        font-family: 'Times New Roman', serif !important;
+        font-size: 12pt !important;
+        line-height: 1.5 !important;
+        color: #000 !important;
+        background: white !important;
+    }
+
+    .worksheet-title {
+        font-size: 24pt !important;
+        font-weight: bold !important;
+        margin-bottom: 20pt !important;
+        text-align: center !important;
+        color: #000 !important;
+    }
+
+    .worksheet-subtitle {
+        font-size: 14pt !important;
+        margin-bottom: 30pt !important;
+        text-align: center !important;
+        color: #333 !important;
+    }
+
+    .worksheet-section h3 {
+        font-size: 16pt !important;
+        font-weight: bold !important;
+        margin-bottom: 15pt !important;
+        margin-top: 25pt !important;
+        border-left: 3pt solid #333 !important;
+        padding-left: 10pt !important;
+        color: #000 !important;
+    }
+
+    .question-block {
+        background: #f9f9f9 !important;
+        border: 1pt solid #ccc !important;
+        border-left: 3pt solid #333 !important;
+        padding: 15pt !important;
+        margin-bottom: 20pt !important;
+        border-radius: 0 !important;
+        page-break-inside: avoid;
+    }
+
+    .question-text {
+        font-weight: bold !important;
+        font-size: 12pt !important;
+        margin-bottom: 10pt !important;
+        color: #000 !important;
+    }
+
+    .answer-space {
+        min-height: 40pt !important;
+        border: 1pt dashed #999 !important;
+        border-radius: 0 !important;
+        margin-top: 10pt !important;
+        background: white !important;
+    }
+
+    /* Data tables for print */
+    .data-table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        margin-bottom: 20pt !important;
+    }
+
+    .data-table th,
+    .data-table td {
+        border: 1pt solid #333 !important;
+        padding: 8pt !important;
+        text-align: left !important;
+        font-size: 11pt !important;
+    }
+
+    .data-table th {
+        background: #f0f0f0 !important;
+        font-weight: bold !important;
+    }
+
+    /* Page breaks */
+    .worksheet-section {
+        page-break-inside: avoid;
+        margin-bottom: 30pt !important;
+    }
+
+    .page-break {
+        page-break-before: always;
+    }
+
+    /* Headers and footers */
+    @page {
+        margin: 20mm;
+        size: A4;
+        
+        @top-left {
+            content: "NASA Farm Navigators";
+            font-size: 10pt;
+            color: #666;
+        }
+        
+        @top-right {
+            content: "Page " counter(page) " of " counter(pages);
+            font-size: 10pt;
+            color: #666;
+        }
+        
+        @bottom-center {
+            content: "Educational Worksheet - Powered by NASA Earth Science Data";
+            font-size: 9pt;
+            color: #999;
+        }
+    }
+
+    /* Print-specific content */
+    .print-only {
+        display: block !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    /* Chart and diagram styling for print */
+    .chart-placeholder {
+        width: 100% !important;
+        height: 200pt !important;
+        border: 2pt dashed #999 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-style: italic !important;
+        color: #666 !important;
+        background: #f9f9f9 !important;
+        margin: 15pt 0 !important;
+    }
+
+    /* Instructions for print */
+    .print-instructions {
+        background: #e8f4fd !important;
+        border: 2pt solid #1976d2 !important;
+        padding: 15pt !important;
+        margin-bottom: 20pt !important;
+        border-radius: 0 !important;
+    }
+
+    .print-instructions h4 {
+        font-size: 13pt !important;
+        font-weight: bold !important;
+        color: #1976d2 !important;
+        margin-bottom: 10pt !important;
+    }
+
+    .print-instructions p {
+        font-size: 11pt !important;
+        margin-bottom: 8pt !important;
+        color: #333 !important;
+    }
+
+    /* NASA data reference boxes */
+    .nasa-reference {
+        background: #f0f8ff !important;
+        border: 1pt solid #4CAF50 !important;
+        border-left: 4pt solid #4CAF50 !important;
+        padding: 12pt !important;
+        margin: 15pt 0 !important;
+        font-size: 11pt !important;
+    }
+
+    .nasa-reference h5 {
+        color: #4CAF50 !important;
+        font-weight: bold !important;
+        margin-bottom: 8pt !important;
+        font-size: 12pt !important;
+    }
+
+    /* Avoid orphans and widows */
+    p, .question-block, .worksheet-section {
+        orphans: 3;
+        widows: 3;
+    }
+
+    /* Ensure images (if any) scale properly */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+        page-break-inside: avoid;
+    }
+
+    /* Score tracking sections */
+    .score-section {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        background: #f5f5f5 !important;
+        padding: 10pt !important;
+        margin: 15pt 0 !important;
+        border: 1pt solid #ccc !important;
+    }
+
+    .score-label {
+        font-weight: bold !important;
+        font-size: 12pt !important;
+    }
+
+    .score-box {
+        width: 40pt !important;
+        height: 20pt !important;
+        border: 2pt solid #333 !important;
+        background: white !important;
+    }
+
+    /* Activity sections */
+    .activity-section {
+        background: #fafafa !important;
+        border: 1pt solid #ddd !important;
+        padding: 15pt !important;
+        margin: 20pt 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .activity-title {
+        font-size: 14pt !important;
+        font-weight: bold !important;
+        color: #2E7D32 !important;
+        margin-bottom: 10pt !important;
+    }
+
+    /* Checkbox lists */
+    .checkbox-list {
+        list-style: none !important;
+        padding-left: 0 !important;
+    }
+
+    .checkbox-list li {
+        margin-bottom: 8pt !important;
+    }
+
+    .checkbox-list li:before {
+        content: "☐ " !important;
+        font-size: 14pt !important;
+        margin-right: 5pt !important;
+    }
+
+    /* Footer information */
+    .worksheet-footer {
+        margin-top: 40pt !important;
+        padding-top: 20pt !important;
+        border-top: 1pt solid #ccc !important;
+        font-size: 10pt !important;
+        color: #666 !important;
+        text-align: center !important;
+    }
+}
+
+/* Print button styling (shown on screen, hidden in print) */
+@media screen {
+    .print-worksheet-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 15px 25px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .print-worksheet-btn:hover {
+        background: #45a049;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+    }
+
+    .print-worksheet-btn:active {
+        transform: translateY(0);
+    }
+
+    .print-preview-mode .print-worksheet-btn {
+        display: block;
+    }
+}
